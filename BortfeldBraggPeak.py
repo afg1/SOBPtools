@@ -1,6 +1,8 @@
 """
 My attempt to implement the Bragg Peak equation found in Bortfeld '97, Med Phys 24 (12) 2024-
 
+Version 0.0.1a: Working implementation, by default we use the 'inaccurate' version of the dose calculation, mainly for speed. May add another call to enable use of the accurate version if required. Note: these equations are valid for water only, and return the dose in Gray via the conversion factor defined globally (calculations are done in MeV and cm).
+
 """
 
 import numpy as np
@@ -38,10 +40,7 @@ def D_prec(R0, phi0, epsilon, sig, z):
     bracfac = 11.26*D565/sig + ((0.157 + 11.26*epsilon)/R0)*D1565
     return frontfac * bracfac * toGray
 
-#R0 = 13.5
-#phi0 = 10000
-#epsilon = 0.20
-#sig = 0.27
+
 
 
 def GenerateBraggPeak(R, phi, eps, sig, zlims=(0, 15), samples=1000):
@@ -49,18 +48,3 @@ def GenerateBraggPeak(R, phi, eps, sig, zlims=(0, 15), samples=1000):
     zdata = np.linspace(zlims[0], zlims[1], samples)
     Ddata = Dv(R, phi, eps, sig, zdata)
     return Ddata
-#Ddata2 = D_prec(R0, phi0, epsilon, sig, zdata)
-#Ddata = Ddata/max(Ddata)
-
-
-#Ddata, grad = sp.pbdv(-0.565, zdata)
-#print(sp.pbdv(-0.565, 0.0))
-
-#R0 = 12.5
-#phi0 = 5000
-#Ddata2 += D_prec(R0, phi0, epsilon, sig, zdata)
-
-#plt.plot(zdata, Ddata)
-##plt.plot(zdata, Ddata)
-##plt.savefig("PristineBP.pdf")
-#plt.show()

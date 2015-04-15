@@ -1,3 +1,10 @@
+"""
+    use the equations from Jette & Chen, 2011 (Phys. Med. Biol. 56 N131) to produce the necessary ranges and weights to produce a SOBP using the pencil beam
+    algorithm from Bortfeld. This includes their re-fudging of the value of p to generate a flat SOBP when simulated in Monte Carlo. 
+    
+    Version 0.0.1a: Working calculation of the SOBP, but I have had to use my own fudge factor to generate a flat SOBP as this code produces it (mainly to make a pretty picture). This only works for the specific calculation used below, and it is probably a better idea to use the lookup table in the function lookupP.
+"""
+
 import BortfeldBraggPeak as bfbp
 import numpy as np
 import matplotlib.pyplot as plt
